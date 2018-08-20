@@ -1,0 +1,67 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import login from '@/components/login'
+import header from '@/components/header'
+import content from '@/components/content'
+import admin from '@/components/admin'
+import tab from '@/components/tab'
+Vue.use(Router)
+
+const route = new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'tab',
+      component: tab
+    },
+    {
+      path: '/login',
+      component: login,
+      meta: {
+        login_require: false
+      }
+    },
+    {
+      path: '/content',
+      component: content,
+      name: 'content',
+      meta: {
+        login_require: true
+      },
+      children: [
+        {
+          path: 'header',
+          name: 'header',
+          component: header
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: admin,
+      meta: {
+        login_require: true
+      }
+    },
+    {
+      path: '***', // 错误路由
+      redirect: '/'
+    }
+  ]
+})
+
+route.beforeEach((to, from, next) => {
+  if (to.meta.login_require) {
+    var login = this.a.isLogin
+    if (login) {
+      next()
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
+})
+export default route
