@@ -2,7 +2,7 @@
   <div class="el-col el-col-24">
     <div class="top">
       <router-link to="/content" class="logo">
-        <img src="../assets/school.png" alt="">
+        <img src="../assets/logo.png" alt="">
       </router-link>
     </div>
   </div>
@@ -19,9 +19,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.top{
-  background-image: url(../assets/line.png)
-}
 .logo{
   display: block;
   img{

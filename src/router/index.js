@@ -4,7 +4,7 @@ import login from '@/components/login'
 import header from '@/components/header'
 import content from '@/components/content'
 import admin from '@/components/admin'
-import tab from '@/components/tab'
+import home from '@/components/home'
 Vue.use(Router)
 
 const route = new Router({
@@ -12,8 +12,11 @@ const route = new Router({
   routes: [
     {
       path: '/',
-      name: 'tab',
-      component: tab
+      name: 'home',
+      component: home,
+      meta: {
+        title: '首页'
+      }
     },
     {
       path: '/login',
@@ -53,13 +56,19 @@ const route = new Router({
 })
 
 route.beforeEach((to, from, next) => {
-  if (to.meta.login_require) {
-    var login = this.a.isLogin
-    if (login) {
-      next()
-    } else {
-      next('/')
-    }
+  // if (to.meta.login_require) {
+  //   var login = this.a.isLogin
+  //   if (login) {
+  //     next()
+  //   } else {
+  //     next('/')
+  //   }
+  // } else {
+  //   next()
+  // }
+  if (to.meta.title) {
+    document.title = to.meta.title
+    next()
   } else {
     next()
   }
