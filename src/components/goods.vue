@@ -3,8 +3,10 @@
     <img :src="key" alt="推荐banner" class="banner">
     <ul>
       <li v-for="(list,index) in list" v-bind:key="index">
-        <img :src="list.src" alt="">
-        <p>{{ list.name }}</p>
+        <router-link :to="{name:'details',params:{id:index}}">
+          <img :src="list.src" alt="">
+          <p>{{ list.name }}</p>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -39,11 +41,15 @@ ul{
   li{
     text-align: center;
     width: 50%;
-    img{
-      width: 75%;
+    a{
       display: block;
-      margin: 0 auto;
+      img{
+        width: 75%;
+        display: block;
+        margin: 0 auto;
+      }
     }
+    
   }
 }
 </style>

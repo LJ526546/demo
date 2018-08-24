@@ -5,6 +5,7 @@ import header from '@/components/header'
 import content from '@/components/content'
 import admin from '@/components/admin'
 import home from '@/components/home'
+import details from '@/components/details'
 Vue.use(Router)
 
 const route = new Router({
@@ -16,6 +17,15 @@ const route = new Router({
       component: home,
       meta: {
         title: '首页'
+      }
+    },
+    //路由跳转传参必须在配置路由时加上参数;
+    {
+      path:'/details/:id',
+      name: 'details',
+      component: details,
+      meta: {
+        title: '详情'
       }
     },
     {
