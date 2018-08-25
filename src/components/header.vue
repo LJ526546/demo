@@ -1,29 +1,39 @@
 <template>
-  <div class="el-col el-col-24">
-    <div class="top">
-      <router-link to="/content" class="logo">
-        <img src="../assets/logo.png" alt="">
-      </router-link>
-    </div>
+  <div class="header">
+    <i class="el-icon-arrow-left" @click="back()"></i>
+    <p>{{ titleName }}</p>
+    <i></i>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      msg: '1'
+  props: {
+    titleName: String,
+    required: true
+  },
+  methods: {
+    back () {
+      this.$router.go(-1)
     }
-  }
+  },
 }
 </script>
 
-<style lang="scss" scoped>
-.logo{
-  display: block;
-  img{
-    display: block;
-    width: 100%
+<style lang="less" scoped>
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .3rem .27rem;
+  background-color: cornflowerblue;
+  i{
+    color: #fff;
+    font-size: .3rem;
+  }
+  p{
+    font-size: .26rem;
+    color: #fff;
   }
 }
 </style>

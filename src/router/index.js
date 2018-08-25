@@ -59,7 +59,7 @@ const route = new Router({
       }
     },
     {
-      path: '***', // 错误路由
+      path: '*', // 错误路由
       redirect: '/'
     }
   ]
