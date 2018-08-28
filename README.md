@@ -28,7 +28,6 @@ npm run e2e
 # run all tests
 npm test
 ```
-# json数据暴露在static资源静态包里
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 谷歌浏览器vue插件https://www.cnblogs.com/alice-fee/p/8038367.html
