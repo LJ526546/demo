@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import Login from './components/login.vue'
+import home from './components/goods.vue'
 export default {
   name: 'App',
   components: {
-    Login
+    home
   }
 }
 </script>
