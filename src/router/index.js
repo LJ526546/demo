@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/components/login'
 import header from '@/components/header'
 import content from '@/components/content'
-import admin from '@/components/admin'
 import home from '@/components/home'
 import details from '@/components/details'
 Vue.use(Router)
@@ -29,13 +27,6 @@ const route = new Router({
       }
     },
     {
-      path: '/login',
-      component: login,
-      meta: {
-        login_require: false
-      }
-    },
-    {
       path: '/content',
       component: content,
       name: 'content',
@@ -49,14 +40,6 @@ const route = new Router({
           component: header
         }
       ]
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: admin,
-      meta: {
-        login_require: true
-      }
     },
     {
       path: '*', // 错误路由
