@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import header from '@/components/header'
-import content from '@/components/content'
 import home from '@/components/home'
 import details from '@/components/details'
 Vue.use(Router)
@@ -26,21 +24,21 @@ const route = new Router({
         title: '详情'
       }
     },
-    {
-      path: '/content',
-      component: content,
-      name: 'content',
-      meta: {
-        login_require: true
-      },
-      children: [
-        {
-          path: 'header',
-          name: 'header',
-          component: header
-        }
-      ]
-    },
+    // {
+    //   path: '/content',
+    //   component: content,
+    //   name: 'content',
+    //   meta: {
+    //     login_require: true
+    //   },
+    //   children: [
+    //     {
+    //       path: 'header',
+    //       name: 'header',
+    //       component: header
+    //     }
+    //   ]
+    // },
     {
       path: '*', // 错误路由
       redirect: '/'

@@ -3,22 +3,25 @@
     <top :titleName="list.name"></top>
     <div class="goods">
       <img :src="list.img" alt="">
+      <div class="details">
         <p>{{ list.name }}</p>
-        <div class="price">
-          <span>{{ list.price }}</span>
-          <div class="update">
-            <i class="el-icon-plus" @click="plus()"></i>
-            <input type="text" id="num">
-            <i class="el-icon-minus" @click="minus()"></i>
-          </div>
+        <div>
+          <span>￥{{ list.price }}</span>
+          <strong>月销：1000件</strong>
         </div>
-        <span class="intro">{{ list.details }}</span>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="list">
+        <p>选择<span>颜色分类</span></p>
+        <i class="el-icon-arrow-right"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Top from "@/components/header.vue"
+import Top from "@/components/goods/header.vue"
 export default {
   data() {
     return {
@@ -28,11 +31,11 @@ export default {
   },
   methods: {
     plus () {
-      var num = document.getElementById('num');
+      const num = document.getElementById('num');
       Number(num.value)<this.list.num ? num.value++ : num.value
     },
     minus () {
-      var num = document.getElementById('num');
+      const num = document.getElementById('num');
       Number(num.value) <= 1 ? num.value = '' : num.value--
     }
   },
@@ -55,20 +58,60 @@ export default {
   img{
     width: 100%;
   }
-  p{
-    font-size: .24rem;
-    text-indent: 2em;
-    color: #333;
-  }
-  .intro{
-    text-indent: 2em;
-    font-size: .2rem;
-    color: #999;
-    display: block;
+  .details{
+    padding: 0 .1rem .2rem;
+    p{
+      font-size: .34rem;
+      color: #333;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .intro{
+      text-indent: 2em;
+      font-size: .2rem;
+      color: #999;
+      display: block;
+    }
+    div{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: .1rem;
+      span{
+        color: #956bff;
+        font-weight: bold;
+        font-size: .26rem;
+      }
+      strong{
+        font-size: .26rem;
+        color: #999;
+      }
+    }
   }
 }
-.price{
-  display: flex;
-  align-items: center;
+.wrap{
+  padding: .2rem .1rem;
+  border-top: .2rem solid #f5f5f5;
+  .list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p{
+      color: #999;
+      font-size: .24rem;
+      span{
+        margin-left: .3rem;
+        color: #333;
+        font-size: .26rem;
+      }
+    }
+    i{
+      font-size: .26rem;
+    }
+  }
 }
 </style>

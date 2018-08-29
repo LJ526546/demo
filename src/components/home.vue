@@ -20,6 +20,7 @@ import Goods from '@/components/goods.vue'
 export default {
   data () {
     return {
+      ok:false,
       item: [
         {name: '列表1'},
         {name: '列表2'},
