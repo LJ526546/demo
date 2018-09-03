@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="key" alt="推荐banner" class="banner">
+    <img src="../assets/banner.png" alt="推荐banner" class="banner">
     <ul>
       <li v-for="(list,index) in list" v-bind:key="index">
         <router-link :to="{name:'details',params:{id:index}}">
@@ -16,14 +16,15 @@
   export default {
     data() {
       return {
-        key: 2,
+        ok: false,
         list: ''
       }
     },
     created () {
       this.$http.get('http://localhost:3030/static/data.json').then((res) => {
         this.list = res.data.list
-        console.log(res.data.list)
+        console.log(this.ok)
+        this.$emit('ok',this.ok)
       })
     }
   }

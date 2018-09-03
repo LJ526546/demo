@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="ok">
     <el-carousel :interval="4000" type="card" height="3.75rem" class="banner">
       <el-carousel-item v-for="item in 6" :key="item">
         <img src="../assets/logo.png" alt="">
@@ -11,7 +11,7 @@
         <p>{{ item.name }}</p>
       </li>
     </ul>
-    <goods></goods>
+    <goods v-on:ok="ok"></goods>
   </div>
 </template>
 
@@ -20,7 +20,6 @@ import Goods from '@/components/goods.vue'
 export default {
   data () {
     return {
-      ok:false,
       item: [
         {name: '列表1'},
         {name: '列表2'},
@@ -31,6 +30,11 @@ export default {
         {name: '列表7'},
         {name: '列表8'},
       ]
+    }
+  },
+  methods: {
+    ok (ok) {
+      console.log(ok)
     }
   },
   components: {

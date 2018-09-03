@@ -1,5 +1,5 @@
 <template>
-  <div v-show="ok">
+  <div>
     <top :titleName="list.name"></top>
     <div class="goods">
       <img :src="list.img" alt="">
@@ -12,21 +12,29 @@
       </div>
     </div>
     <div class="wrap">
-      <div class="list">
+      <div class="list"  @click="animate = !animate">
         <p>选择<span>颜色分类</span></p>
         <i class="el-icon-arrow-right"></i>
       </div>
     </div>
+    <transition name="color">
+      <color class="bottom" v-if="animate" @click.native="animate = !animate">
+
+      </color>
+    </transition>
+    <div class="mask" v-if="animate"></div>
   </div>
 </template>
 
 <script>
 import Top from "@/components/goods/header.vue"
+import color from "@/components/goods/color.vue"
 export default {
   data() {
     return {
       list:'',
-      ok: false
+      ok: false,
+      animate:false
     }
   },
   methods: {
@@ -47,7 +55,8 @@ export default {
     })
   },
   components: {
-    Top
+    Top,
+    color
   }
 }
 
@@ -94,15 +103,15 @@ export default {
   }
 }
 .wrap{
-  padding: .2rem .1rem;
   border-top: .2rem solid #f5f5f5;
   .list{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: .3rem;
     p{
       color: #999;
-      font-size: .24rem;
+      font-size: .3rem;
       span{
         margin-left: .3rem;
         color: #333;
@@ -110,8 +119,33 @@ export default {
       }
     }
     i{
-      font-size: .26rem;
+      font-size: .3rem;
     }
   }
 }
+.bottom{
+  position: absolute;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  background: #333;
+  transition: all .3s;
+  z-index: 2;
+}
+.mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+  z-index: 1;
+}
+.color-enter,.color-leave-to{
+  bottom: -4rem;
+}
+.color-enter-to,.color-leave{
+  bottom: 0;
+}
+
 </style>
