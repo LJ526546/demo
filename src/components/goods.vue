@@ -3,7 +3,7 @@
     <img src="../assets/banner.png" alt="推荐banner" class="banner">
     <ul>
       <li v-for="(list,index) in list" v-bind:key="index">
-        <router-link :to="{name:'details',params:{id:index}}">
+        <router-link :to="{name:'details',params:{id:list.id}}">
           <img :src="list.img" alt="">
           <p>{{ list.name }}</p>
         </router-link>

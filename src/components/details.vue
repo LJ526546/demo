@@ -18,11 +18,11 @@
       </div>
     </div>
     <transition name="color">
-      <color class="bottom" v-if="animate" @click.native="animate = !animate">
-
-      </color>
+      <color class="bottom" v-if="animate" @click.native="animate = !animate" :id='this.list.id'></color>
     </transition>
-    <div class="mask" v-if="animate"></div>
+    <transition name="mask">
+      <div class="mask" v-if="animate"></div>
+    </transition>
   </div>
 </template>
 
@@ -51,6 +51,7 @@ export default {
   created () {
     this.$http.get('http://localhost:3030/static/data.json').then((res) => {
       this.list = res.data.list[this.$route.params.id]
+      console.log(this.list)
       this.ok = true
     })
   },
@@ -128,7 +129,7 @@ export default {
   bottom: 0;
   height: 4rem;
   width: 100%;
-  background: #333;
+  background: #fff;
   transition: all .3s;
   z-index: 2;
 }
@@ -147,5 +148,10 @@ export default {
 .color-enter-to,.color-leave{
   bottom: 0;
 }
-
+.mask-enter-active, .mask-leave-active {
+  transition: opacity .3s;
+}
+.mask-enter, .mask-leave-to{
+  opacity: 0;
+}
 </style>

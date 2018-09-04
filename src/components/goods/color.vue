@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    {{ id }}
   </div>
 </template>
 
@@ -10,6 +10,10 @@ export default {
     return {
       key : '1'
     }
+  },
+  props:{
+    id: String,
+    required: true
   },
   methods: {
     name () {
