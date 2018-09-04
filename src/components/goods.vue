@@ -23,7 +23,7 @@
     created () {
       this.$http.get('http://localhost:3030/static/data.json').then((res) => {
         this.list = res.data.list
-        console.log(this.ok)
+        this.ok = !this.ok
         this.$emit('ok',this.ok)
       })
     }

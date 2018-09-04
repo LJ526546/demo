@@ -1,5 +1,5 @@
 <template>
-  <div v-show="ok">
+  <div v-show="show">
     <el-carousel :interval="4000" type="card" height="3.75rem" class="banner">
       <el-carousel-item v-for="item in 6" :key="item">
         <img src="../assets/logo.png" alt="">
@@ -29,12 +29,13 @@ export default {
         {name: '列表6'},
         {name: '列表7'},
         {name: '列表8'},
-      ]
+      ],
+      show:false
     }
   },
   methods: {
     ok (ok) {
-      console.log(ok)
+      this.show = ok
     }
   },
   components: {
