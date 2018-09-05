@@ -8,8 +8,11 @@ import layer from 'vue-layer'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import rem from './assets/js/rem.js'
+import alert from './assets/js/alert.js'
 
 Vue.prototype.$rem = rem
+
+Vue.prototype.$alert = alert
 
 Vue.config.productionTip = false
 

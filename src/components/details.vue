@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ok">
     <top :titleName="list.name"></top>
     <div class="goods">
       <img :src="list.img" alt="">
@@ -13,15 +13,15 @@
     </div>
     <div class="wrap">
       <div class="list"  @click="animate = !animate">
-        <p>选择<span>颜色分类</span></p>
+        <p>选择<span>{{ color }}</span></p>
         <i class="el-icon-arrow-right"></i>
       </div>
     </div>
     <transition name="color">
-      <color class="bottom" v-if="animate" @click.native="animate = !animate" :id='this.list.id'></color>
+      <color class="bottom" v-if="animate" :item='list' v-on:child = child v-on:index = index></color>
     </transition>
     <transition name="mask">
-      <div class="mask" v-if="animate"></div>
+      <div class="mask" v-if="animate" @click="animate = !animate"></div>
     </transition>
   </div>
 </template>
@@ -34,7 +34,8 @@ export default {
     return {
       list:'',
       ok: false,
-      animate:false
+      animate:false,
+      color: '颜色分类'
     }
   },
   methods: {
@@ -45,13 +46,25 @@ export default {
     minus () {
       const num = document.getElementById('num');
       Number(num.value) <= 1 ? num.value = '' : num.value--
+    },
+    child (child) {
+      this.animate = child
+    },
+    index (index){
+      if(index !== -1){
+        this.animate = !this.animate
+        this.list.color[index]
+        this.color = this.list.color[index].type
+        this.list.price = this.list.color[index].price
+      }else{
+        alert('尚未选择颜色！')
+      }
     }
   },
   //组件实例创建完成，属性已经绑定，DOM未生成之前执行axios获取模拟数据渲染页面
   created () {
     this.$http.get('http://localhost:3030/static/data.json').then((res) => {
       this.list = res.data.list[this.$route.params.id]
-      console.log(this.list)
       this.ok = true
     })
   },
@@ -127,7 +140,6 @@ export default {
 .bottom{
   position: absolute;
   bottom: 0;
-  height: 4rem;
   width: 100%;
   background: #fff;
   transition: all .3s;
