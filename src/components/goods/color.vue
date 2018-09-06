@@ -16,7 +16,6 @@ export default {
   data() {
     return {
       key : '1',
-      list: '',
       i: -1
     }
   },

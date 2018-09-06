@@ -16,6 +16,10 @@
         <p>选择<span>{{ color }}</span></p>
         <i class="el-icon-arrow-right"></i>
       </div>
+      <div class="list" @click="introAnimate = !introAnimate">
+        <p>详细介绍<span></span></p>
+        <i class="el-icon-arrow-right"></i>
+      </div>
     </div>
     <transition name="color">
       <color class="bottom" v-if="animate" :item='list' v-on:child = child v-on:index = index></color>
@@ -23,19 +27,28 @@
     <transition name="mask">
       <div class="mask" v-if="animate" @click="animate = !animate"></div>
     </transition>
+    <transition name="color">
+      <intro class="intro" v-if="introAnimate" @click="introAnimate = !introAnimate"></intro>
+    </transition>
+    <transition name="mask">
+      <div class="mask" v-if="introAnimate" :item='list'></div>
+    </transition>
   </div>
 </template>
 
 <script>
 import Top from "@/components/goods/header.vue"
 import color from "@/components/goods/color.vue"
+import intro from "@/components/goods/intro.vue"
 export default {
   data() {
     return {
       list:'',
       ok: false,
       animate:false,
-      color: '颜色分类'
+      introAnimate:false,
+      color: '颜色分类',
+      intro: ''
     }
   },
   methods: {
@@ -70,7 +83,8 @@ export default {
   },
   components: {
     Top,
-    color
+    color,
+    intro
   }
 }
 
@@ -92,12 +106,6 @@ export default {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
-    }
-    .intro{
-      text-indent: 2em;
-      font-size: .2rem;
-      color: #999;
-      display: block;
     }
     div{
       display: flex;
@@ -154,6 +162,15 @@ export default {
   background: rgba(0,0,0,.6);
   z-index: 1;
 }
+.intro{
+  position: absolute;
+  bottom: 0;
+  height: 3rem;
+  width: 100%;
+  background: #fff;
+  transition: all .3s;
+  z-index: 2;
+}
 .color-enter,.color-leave-to{
   bottom: -4rem;
 }
@@ -166,4 +183,5 @@ export default {
 .mask-enter, .mask-leave-to{
   opacity: 0;
 }
+
 </style>
