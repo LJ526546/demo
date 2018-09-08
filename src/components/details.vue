@@ -22,16 +22,16 @@
       </div>
     </div>
     <transition name="color">
-      <color class="bottom" v-if="animate" :item='list' v-on:child = child v-on:index = index></color>
+      <color class="bottom" v-if="animate" :item='list' :num='num' v-on:child = child v-on:index = index></color>
     </transition>
     <transition name="mask">
       <div class="mask" v-if="animate" @click="animate = !animate"></div>
     </transition>
     <transition name="color">
-      <intro class="intro" v-if="introAnimate" @click="introAnimate = !introAnimate"></intro>
+      <intro class="intro" v-if="introAnimate" :item='list' @click.native="introAnimate = !introAnimate"></intro>
     </transition>
     <transition name="mask">
-      <div class="mask" v-if="introAnimate" :item='list'></div>
+      <div class="mask" v-if="introAnimate" @click="introAnimate = !introAnimate"></div>
     </transition>
   </div>
 </template>
@@ -48,16 +48,17 @@ export default {
       animate:false,
       introAnimate:false,
       color: '颜色分类',
-      intro: ''
+      intro: '',
+      num: ''
     }
   },
   methods: {
     plus () {
-      const num = document.getElementById('num');
+      let num = document.getElementById('num');
       Number(num.value)<this.list.num ? num.value++ : num.value
     },
     minus () {
-      const num = document.getElementById('num');
+      let num = document.getElementById('num');
       Number(num.value) <= 1 ? num.value = '' : num.value--
     },
     child (child) {
@@ -65,6 +66,7 @@ export default {
     },
     index (index){
       if(index !== -1){
+        this.num = index
         this.animate = !this.animate
         this.list.color[index]
         this.color = this.list.color[index].type
@@ -165,7 +167,7 @@ export default {
 .intro{
   position: absolute;
   bottom: 0;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   background: #fff;
   transition: all .3s;

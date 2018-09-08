@@ -16,14 +16,15 @@ export default {
   data() {
     return {
       key : '1',
-      i: -1
+      i: -1,
     }
   },
   props:{
     item: {
       type: Object,
       default: '数据暂无'
-    }
+    },
+    a: [String, Number]
   },
   methods: {
     num (index) {
@@ -35,7 +36,10 @@ export default {
     cancel () {
       this.$emit('child',false)
     }
-  }
+  },
+  created() {
+    this.a !== '' ? this.i = this.a : ''
+  },
 }
 </script>
 
