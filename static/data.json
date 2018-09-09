@@ -23,7 +23,57 @@
       ],
       "date": "2018.09.05",
       "address": "江西省南昌市",
-      "code": "CCCCCCCC"
+      "code": "CCCCCCCC",
+      "comment": [
+        {
+          "goods":"物美价廉1",
+          "user":"佚名1",
+          "img":"../static/img/default.png",
+          "time":"2018-09-091",
+          "color":"绿色1",
+          "word":"东西不错，下次还买！1"
+        },
+        {
+          "goods":"物美价廉2",
+          "user":"佚名2",
+          "img":"../static/img/default.png",
+          "time":"2018-09-092",
+          "color":"绿色2",
+          "word":"东西不错，下次还买！2"
+        },
+        {
+          "goods":"物美价廉3",
+          "user":"佚名3",
+          "img":"../static/img/default.png",
+          "time":"2018-09-093",
+          "color":"绿色3",
+          "word":"东西不错，下次还买！3"
+        },
+        {
+          "goods":"物美价廉3",
+          "user":"佚名3",
+          "img":"../static/img/default.png",
+          "time":"2018-09-093",
+          "color":"绿色",
+          "word":"东西不错，下次还买！3"
+        },
+        {
+          "goods":"物美价廉4",
+          "user":"佚名4",
+          "img":"../static/img/default.png",
+          "time":"2018-09-094",
+          "color":"绿色4",
+          "word":"东西不错，下次还买！4"
+        },
+        {
+          "goods":"物美价廉5",
+          "user":"佚名5",
+          "img":"../static/img/default.png",
+          "time":"2018-09-095",
+          "color":"绿色5",
+          "word":"东西不错，下次还买！5"
+        }
+      ]
     },
     {
       "id":"1",

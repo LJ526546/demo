@@ -21,6 +21,7 @@
         <i class="el-icon-arrow-right"></i>
       </div>
     </div>
+    <comment :comment="list.comment"></comment>
     <transition name="color">
       <color class="bottom" v-if="animate" :item='list' :num='num' v-on:child = child v-on:index = index></color>
     </transition>
@@ -37,9 +38,10 @@
 </template>
 
 <script>
-import Top from "@/components/goods/header.vue"
-import color from "@/components/goods/color.vue"
-import intro from "@/components/goods/intro.vue"
+import Top from "@/components/goods/header"
+import color from "@/components/goods/color"
+import intro from "@/components/goods/intro"
+import comment from "@/components/comment/comment"
 export default {
   data() {
     return {
@@ -78,21 +80,25 @@ export default {
   },
   //组件实例创建完成，属性已经绑定，DOM未生成之前执行axios获取模拟数据渲染页面
   created () {
-    this.$http.get('http://localhost:3030/static/data.json').then((res) => {
+    this.$http.get('static/data.json').then((res) => {
       this.list = res.data.list[this.$route.params.id]
       this.ok = true
+    }).catch((err) => {
+      console.log(err)
     })
   },
   components: {
     Top,
     color,
-    intro
+    intro,
+    comment
   }
 }
 
 </script>
 
 <style scoped lang="less">
+@import "../assets/less/common";
 .goods{
   img{
     width: 100%;
@@ -128,6 +134,7 @@ export default {
 }
 .wrap{
   border-top: .2rem solid #f5f5f5;
+  border-bottom: .2rem solid #f5f5f5;
   .list{
     display: flex;
     align-items: center;
@@ -147,6 +154,7 @@ export default {
     }
   }
 }
+
 .bottom{
   position: absolute;
   bottom: 0;

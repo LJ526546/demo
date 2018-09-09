@@ -4,7 +4,7 @@
       <a href="javascript:;" @click="cancel()">取消</a>
       <a href="javascript:;" @click="sure()">确定</a>
     </div>
-    <div class="list" v-for="(list,index) in item.color" v-bind:key="index" @click="num(index)">
+    <div class="list" v-for="(list,index) in item.color" v-bind:key="index" @click="show(index)">
       <i class="el-icon-check" v-show="index === i"></i>
       <p>{{ list.type }}</p>
     </div>
@@ -24,10 +24,10 @@ export default {
       type: Object,
       default: '数据暂无'
     },
-    a: [String, Number]
+    num: [String, Number]
   },
   methods: {
-    num (index) {
+    show (index) {
       this.i = index
     },
     sure () {
@@ -38,7 +38,7 @@ export default {
     }
   },
   created() {
-    this.a !== '' ? this.i = this.a : ''
+    this.num !== '' ? this.i = this.num : ''
   },
 }
 </script>

@@ -5,7 +5,7 @@ import details from '@/components/details'
 Vue.use(Router)
 
 const route = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',

@@ -15,8 +15,10 @@ export default {
     }
   },
   props: {
-    item: Object,
-    default: '数据暂无'
+    item: {
+      type: Object,
+      defauls: '暂无数据'
+    }
   }
 }
 </script>

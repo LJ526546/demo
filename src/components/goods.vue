@@ -13,21 +13,23 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        ok: false,
-        list: ''
-      }
-    },
-    created () {
-      this.$http.get('http://localhost:3030/static/data.json').then((res) => {
-        this.list = res.data.list
-        this.ok = !this.ok
-        this.$emit('ok',this.ok)
-      })
+export default {
+  data() {
+    return {
+      ok: false,
+      list: ''
     }
+  },
+  created () {
+    this.$http.get('static/data.json').then((res) => {
+      this.list = res.data.list
+      this.ok = !this.ok
+      this.$emit('ok',this.ok)
+    }).catch((err) => {
+      
+    })
   }
+}
 </script>
 
 <style scoped lang="less">
