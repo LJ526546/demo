@@ -1,7 +1,7 @@
 <template>
   <div v-if="ok">
-    <top :titleName="list.name"></top>
-    <div class="goods">
+    <top :titleName="list.name" :class=" fixed == true? 'fixed':''" id="top"></top>
+    <div class="goods" :class=" fixed == true ? 'top':''">
       <img :src="list.img" alt="">
       <div class="details">
         <p>{{ list.name }}</p>
@@ -21,7 +21,7 @@
         <i class="el-icon-arrow-right"></i>
       </div>
     </div>
-    <comment :comment="list.comment"></comment>
+    <comment :comment="list.comment" v-on:allComment = allComment></comment>
     <transition name="color">
       <color class="bottom" v-if="animate" :item='list' :num='num' v-on:child = child v-on:index = index></color>
     </transition>
@@ -34,6 +34,9 @@
     <transition name="mask">
       <div class="mask" v-if="introAnimate" @click="introAnimate = !introAnimate"></div>
     </transition>
+    <transition name="all">
+      <all></all>
+    </transition>
   </div>
 </template>
 
@@ -42,6 +45,7 @@ import Top from "@/components/goods/header"
 import color from "@/components/goods/color"
 import intro from "@/components/goods/intro"
 import comment from "@/components/comment/comment"
+import all from "@/components/comment/all"
 export default {
   data() {
     return {
@@ -51,7 +55,8 @@ export default {
       introAnimate:false,
       color: '颜色分类',
       intro: '',
-      num: ''
+      num: '',
+      fixed: false,
     }
   },
   methods: {
@@ -76,6 +81,19 @@ export default {
       }else{
         alert('尚未选择颜色！')
       }
+    },
+    scroll () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      const top = document.getElementById('top')
+      if(top === null){
+      }else{
+        const top1 = top.offsetTop
+        scrollTop>top1 ? this.fixed = true : this.fixed = false
+      }
+    },
+    allComment (allComment) {
+      this.ok = allComment
+      this.show = !allComment
     }
   },
   //组件实例创建完成，属性已经绑定，DOM未生成之前执行axios获取模拟数据渲染页面
@@ -87,11 +105,15 @@ export default {
       console.log(err)
     })
   },
+  mounted() {
+    window.addEventListener('scroll',this.scroll)
+  },
   components: {
     Top,
     color,
     intro,
-    comment
+    comment,
+    all
   }
 }
 
@@ -99,6 +121,15 @@ export default {
 
 <style scoped lang="less">
 @import "../assets/less/common";
+.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7.5rem - .27rem - .27rem;
+}
+.top{
+  margin-top: .95rem;
+}
 .goods{
   img{
     width: 100%;
@@ -156,7 +187,7 @@ export default {
 }
 
 .bottom{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background: #fff;
@@ -173,7 +204,7 @@ export default {
   z-index: 1;
 }
 .intro{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   min-height: 3rem;
   width: 100%;

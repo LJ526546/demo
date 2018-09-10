@@ -3,7 +3,7 @@
     <div class="comment">
       <div class="top">
         <p>评价({{ this.comment.length }})</p>
-        <span :comment="this.comment">查看全部<i class="el-icon-arrow-right"></i></span>
+        <span @click="siblings()">查看全部<i class="el-icon-arrow-right"></i></span>
       </div>
       <div class="list">
         <p v-for="(list,index) in this.comment" v-bind:key="index" v-if="index<3">{{ list.goods }}</p>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import Com from '../../assets/js/common'
 export default {
   data() {
     return {
@@ -31,6 +32,12 @@ export default {
       word: '',
       time: '',
       color: ''
+    }
+  },
+  methods: {
+    siblings () {
+      Com.$emit('val',this.comment)
+      this.$emit('allComment',false)
     }
   },
   props: {
@@ -46,7 +53,7 @@ export default {
     this.word = this.comment[len - 1].word
     this.time = this.comment[len - 1].time
     this.color = this.comment[len - 1].color
-  },
+  }
 }
 </script>
 
