@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import Com from '../../assets/js/common'
 export default {
   data() {
     return {
@@ -36,7 +35,6 @@ export default {
   },
   methods: {
     siblings () {
-      Com.$emit('val',this.comment)
       this.$emit('allComment',false)
     }
   },

@@ -1,42 +1,44 @@
 <template>
   <div v-if="ok">
-    <top :titleName="list.name" :class=" fixed == true? 'fixed':''" id="top"></top>
-    <div class="goods" :class=" fixed == true ? 'top':''">
-      <img :src="list.img" alt="">
-      <div class="details">
-        <p>{{ list.name }}</p>
-        <div>
-          <span>￥{{ list.price }}</span>
-          <strong>月销：1000件</strong>
+      <top :titleName="list.name" :class=" fixed == true? 'fixed':''" id="top"></top>
+      <div v-if="!showTwo">
+        <div class="goods" :class=" fixed == true ? 'top':''">
+          <img :src="list.img" alt="">
+          <div class="details">
+            <p>{{ list.name }}</p>
+            <div>
+              <span>￥{{ list.price }}</span>
+              <strong>月销：1000件</strong>
+            </div>
+          </div>
         </div>
+        <div class="wrap">
+          <div class="list"  @click="animate = !animate">
+            <p>选择<span>{{ color }}</span></p>
+            <i class="el-icon-arrow-right"></i>
+          </div>
+          <div class="list" @click="introAnimate = !introAnimate">
+            <p>详细介绍<span></span></p>
+            <i class="el-icon-arrow-right"></i>
+          </div>
+        </div>
+        <comment :comment="list.comment" v-on:allComment = allComment></comment>
+        <transition name="color">
+          <color class="bottom" v-if="animate" :item='list' :num='num' v-on:child = child v-on:index = index></color>
+        </transition>
+        <transition name="mask">
+          <div class="mask" v-if="animate" @click="animate = !animate"></div>
+        </transition>
+        <transition name="color">
+          <intro class="intro" v-if="introAnimate" :item='list' @click.native="introAnimate = !introAnimate"></intro>
+        </transition>
+        <transition name="mask">
+          <div class="mask" v-if="introAnimate" @click="introAnimate = !introAnimate"></div>
+        </transition>
       </div>
-    </div>
-    <div class="wrap">
-      <div class="list"  @click="animate = !animate">
-        <p>选择<span>{{ color }}</span></p>
-        <i class="el-icon-arrow-right"></i>
-      </div>
-      <div class="list" @click="introAnimate = !introAnimate">
-        <p>详细介绍<span></span></p>
-        <i class="el-icon-arrow-right"></i>
-      </div>
-    </div>
-    <comment :comment="list.comment" v-on:allComment = allComment></comment>
-    <transition name="color">
-      <color class="bottom" v-if="animate" :item='list' :num='num' v-on:child = child v-on:index = index></color>
-    </transition>
-    <transition name="mask">
-      <div class="mask" v-if="animate" @click="animate = !animate"></div>
-    </transition>
-    <transition name="color">
-      <intro class="intro" v-if="introAnimate" :item='list' @click.native="introAnimate = !introAnimate"></intro>
-    </transition>
-    <transition name="mask">
-      <div class="mask" v-if="introAnimate" @click="introAnimate = !introAnimate"></div>
-    </transition>
-    <transition name="all">
-      <all></all>
-    </transition>
+      <transition name="all">
+        <all v-show="showTwo" :allMsg="list.comment" :class=" fixed == true ? 'top':''"></all>
+      </transition>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ import color from "@/components/goods/color"
 import intro from "@/components/goods/intro"
 import comment from "@/components/comment/comment"
 import all from "@/components/comment/all"
+import Com from '../assets/js/common'
 export default {
   data() {
     return {
@@ -57,17 +60,10 @@ export default {
       intro: '',
       num: '',
       fixed: false,
+      showTwo: false
     }
   },
   methods: {
-    plus () {
-      let num = document.getElementById('num');
-      Number(num.value)<this.list.num ? num.value++ : num.value
-    },
-    minus () {
-      let num = document.getElementById('num');
-      Number(num.value) <= 1 ? num.value = '' : num.value--
-    },
     child (child) {
       this.animate = child
     },
@@ -92,9 +88,9 @@ export default {
       }
     },
     allComment (allComment) {
-      this.ok = allComment
-      this.show = !allComment
-    }
+      this.showTwo = !allComment
+    },
+
   },
   //组件实例创建完成，属性已经绑定，DOM未生成之前执行axios获取模拟数据渲染页面
   created () {
