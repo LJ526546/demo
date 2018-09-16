@@ -9,11 +9,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      key : 'value'
-    }
-  },
   props: {
     item: {
       type: Object,

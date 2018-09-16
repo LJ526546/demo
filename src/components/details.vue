@@ -1,6 +1,6 @@
 <template>
   <div v-if="ok">
-      <top :titleName="list.name" :class=" fixed == true? 'fixed':''" id="top"></top>
+      <top :titleName="list.name" v-on:parameter = parameter :val="val" :class=" fixed == true? 'fixed':''" id="top"></top>
       <div v-if="!showTwo">
         <div class="goods" :class=" fixed == true ? 'top':''">
           <img :src="list.img" alt="">
@@ -37,7 +37,7 @@
         </transition>
       </div>
       <transition name="all">
-        <all v-show="showTwo" :allMsg="list.comment" :class=" fixed == true ? 'top':''"></all>
+        <all v-if="showTwo" :allMsg="list.comment" :class=" fixed == true ? 'top':''"></all>
       </transition>
   </div>
 </template>
@@ -60,7 +60,8 @@ export default {
       intro: '',
       num: '',
       fixed: false,
-      showTwo: false
+      showTwo: false,
+      val:1
     }
   },
   methods: {
@@ -89,7 +90,14 @@ export default {
     },
     allComment (allComment) {
       this.showTwo = !allComment
+      this.val = 2
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
     },
+    parameter (parameter) {
+      this.showTwo = !parameter
+      this.val = 1
+    }
 
   },
   //组件实例创建完成，属性已经绑定，DOM未生成之前执行axios获取模拟数据渲染页面

@@ -10,11 +10,17 @@
 export default {
   props: {
     titleName: String,
+    val: Number,
     required: true
   },
   methods: {
     back () {
-      this.$router.go(-1)
+      if (this.val === 1){
+        this.$router.go(-1)
+      }else{
+        this.$emit('parameter',true)
+      }
+      // this.$router.go(-1)
     }
   },
 }

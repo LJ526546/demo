@@ -6,7 +6,7 @@
         <span @click="siblings()">查看全部<i class="el-icon-arrow-right"></i></span>
       </div>
       <div class="list">
-        <p v-for="(list,index) in this.comment" v-bind:key="index" v-if="index<3">{{ list.goods }}</p>
+        <p v-for="(list,index) in this.comment" v-bind:key="index" v-if="index<3">{{ list.type }}</p>
       </div>
     </div>
     <div class="user">
@@ -30,7 +30,8 @@ export default {
       img: '',
       word: '',
       time: '',
-      color: ''
+      color: '',
+      len : ''
     }
   },
   methods: {
@@ -45,12 +46,13 @@ export default {
     }
   },
   created() {
-    var len = this.comment.length
-    this.img = this.comment[len - 1].img
-    this.name = this.comment[len - 1].user
-    this.word = this.comment[len - 1].word
-    this.time = this.comment[len - 1].time
-    this.color = this.comment[len - 1].color
+    const len = this.comment[0].wrap.length
+    const wrap = this.comment[0].wrap[len - 1]
+    this.img = wrap.img
+    this.name = wrap.user
+    this.word = wrap.word
+    this.time = wrap.time
+    this.color = wrap.color
   }
 }
 </script>
@@ -59,6 +61,8 @@ export default {
 @import "../../assets/less/common";
 .wrap{
   padding: .3rem;
+  margin-bottom: 1rem;
+  border-bottom: 0;
   .comment{
     .top{
       display: flex;
